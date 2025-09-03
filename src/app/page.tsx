@@ -1,69 +1,78 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Phone, Mail, Facebook, Pizza, ThumbsUp, CookingPot } from "lucide-react";
+import { Phone, Mail, Facebook, Pizza, ThumbsUp, CookingPot, Cake } from "lucide-react";
 import ContactForm from "@/components/contact-form";
 import { PizzaIcon } from "@/components/pizza-icon";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const pizzas = [
   {
     name: "Americana",
     description: "La clásica combinación de queso mozzarella, salsa de tomate y jamón de primera.",
     image: "https://picsum.photos/600/400?random=1",
-    aiHint: "american pizza"
+    aiHint: "american pizza",
+    prices: { personal: "S/ 15.00", familiar: "S/ 30.00" }
   },
   {
     name: "Hawaiana",
     description: "Una mezcla tropical de jamón y piña jugosa sobre una base de queso derretido.",
     image: "https://picsum.photos/600/400?random=2",
-    aiHint: "hawaiian pizza"
+    aiHint: "hawaiian pizza",
+    prices: { personal: "S/ 16.00", familiar: "S/ 32.00" }
   },
   {
     name: "Pepperoni",
     description: "Para los amantes del picante, cubierta de pepperoni de alta calidad y mucho queso.",
     image: "https://picsum.photos/600/400?random=3",
-    aiHint: "pepperoni pizza"
+    aiHint: "pepperoni pizza",
+    prices: { personal: "S/ 17.00", familiar: "S/ 34.00" }
   },
   {
     name: "Cuatro Quesos",
     description: "Una sinfonía de sabores con queso mozzarella, provolone, parmesano y azul.",
     image: "https://picsum.photos/600/400?random=4",
-    aiHint: "cheese pizza"
+    aiHint: "cheese pizza",
+    prices: { personal: "S/ 18.00", familiar: "S/ 36.00" }
   },
   {
     name: "Vegetariana",
     description: "Fresca y saludable, con pimientos, cebolla, champiñones, aceitunas y maíz.",
     image: "https://picsum.photos/600/400?random=5",
-    aiHint: "vegetarian pizza"
+    aiHint: "vegetarian pizza",
+    prices: { personal: "S/ 16.00", familiar: "S/ 32.00" }
   },
   {
     name: "Carbonara",
     description: "Inspirada en la pasta, con base de nata, bacon, cebolla y un toque de pimienta negra.",
     image: "https://picsum.photos/600/400?random=6",
-    aiHint: "carbonara pizza"
+    aiHint: "carbonara pizza",
+    prices: { personal: "S/ 18.00", familiar: "S/ 36.00" }
   },
 ];
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center">
           <a href="#" className="flex items-center gap-2 font-bold font-headline text-xl">
             <PizzaIcon className="h-8 w-8 text-primary" />
             Fabichelo
           </a>
-          <nav className="ml-auto hidden md:flex gap-6 text-sm font-medium">
+          <nav className="ml-auto hidden md:flex gap-4 text-sm font-medium items-center">
             <a href="#pizzas" className="transition-colors hover:text-primary">Nuestras Pizzas</a>
             <a href="#quienes-somos" className="transition-colors hover:text-primary">Quiénes Somos</a>
+            <a href="#eventos" className="transition-colors hover:text-primary">Eventos</a>
             <a href="#preparacion" className="transition-colors hover:text-primary">Preparación</a>
             <a href="#contacto" className="transition-colors hover:text-primary">Contacto</a>
+            <ThemeToggle />
           </nav>
         </div>
       </header>
 
       <main className="flex-grow">
-        <section className="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center text-center text-white">
+        <section className="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center text-center text-primary-foreground">
            <Image
             src="https://picsum.photos/1920/1080"
             alt="Pizza deliciosa"
@@ -87,16 +96,29 @@ export default function Home() {
 
         <section id="pizzas" className="py-12 md:py-24">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Nuestras Pizzas</h2>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold">Nuestras Pizzas</h2>
+              <p className="text-muted-foreground mt-2">Disponibles en tamaño Personal (18cm) y Familiar (30cm)</p>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {pizzas.map((pizza) => (
-                <Card key={pizza.name} className="overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <Card key={pizza.name} className="overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl flex flex-col">
                   <CardHeader className="p-0">
                     <Image src={pizza.image} alt={pizza.name} width={600} height={400} className="w-full h-48 object-cover" data-ai-hint={pizza.aiHint} />
                   </CardHeader>
-                  <CardContent className="p-6">
+                  <CardContent className="p-6 flex flex-col flex-grow">
                     <CardTitle className="text-2xl mb-2">{pizza.name}</CardTitle>
-                    <CardDescription>{pizza.description}</CardDescription>
+                    <CardDescription className="flex-grow">{pizza.description}</CardDescription>
+                    <div className="mt-4 pt-4 border-t border-border">
+                      <div className="flex justify-between font-semibold">
+                        <span>Personal (18cm):</span>
+                        <span>{pizza.prices.personal}</span>
+                      </div>
+                      <div className="flex justify-between font-semibold mt-1">
+                        <span>Familiar (30cm):</span>
+                        <span>{pizza.prices.familiar}</span>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -131,49 +153,67 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="preparacion" className="py-12 md:py-24">
+        <section id="eventos" className="py-12 md:py-24">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Consejos para una Pizza Perfecta</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
-              <Card>
-                <CardHeader>
-                  <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
-                    <CookingPot className="h-10 w-10 text-primary" />
-                  </div>
-                  <CardTitle className="mt-4">1. Precalienta el Horno</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Para una base crujiente, precalienta tu horno a 220°C (425°F). Coloca la rejilla en el centro.</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
-                    <Pizza className="h-10 w-10 text-primary" />
-                  </div>
-                  <CardTitle className="mt-4">2. Hornea Directamente</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Retira todos los envoltorios y coloca la pizza congelada directamente sobre la rejilla del horno. ¡No uses bandeja!</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
-                    <ThumbsUp className="h-10 w-10 text-primary" />
-                  </div>
-                  <CardTitle className="mt-4">3. Disfruta al Momento</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Hornea de 10 a 15 minutos o hasta que el queso esté dorado y burbujeante. Deja enfriar un minuto y ¡a disfrutar!</p>
-                </CardContent>
-              </Card>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="rounded-lg overflow-hidden shadow-xl">
+                    <Image
+                        src="https://picsum.photos/800/600?random=10"
+                        alt="Celebración de cumpleaños con pizza"
+                        width={800}
+                        height={600}
+                        className="w-full h-full object-cover"
+                        data-ai-hint="birthday pizza party"
+                    />
+                </div>
+                <div>
+                    <span className="text-primary font-semibold">Eventos Especiales</span>
+                    <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">¡Celebra con Sabor a Fabichelo!</h2>
+                    <p className="text-muted-foreground mb-6">
+                        ¿Planeando un cumpleaños, una reunión familiar o un evento corporativo? Nuestras pizzas son la opción perfecta para deleitar a tus invitados sin complicaciones. Ofrecemos paquetes especiales y descuentos por volumen para que tu celebración sea un éxito.
+                    </p>
+                    <p className="text-muted-foreground mb-8">
+                        Contáctanos para personalizar tu pedido y nos encargaremos de que tengas las mejores pizzas, listas para hornear y disfrutar.
+                    </p>
+                    <Button asChild>
+                        <a href="#contacto">Cotizar Evento</a>
+                    </Button>
+                </div>
             </div>
           </div>
         </section>
 
 
-        <section id="contacto" className="bg-card py-12 md:py-24">
+        <section id="preparacion" className="bg-card py-12 md:py-24">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Consejos para una Pizza Perfecta</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+              <div className="flex flex-col items-center">
+                <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
+                  <CookingPot className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mt-4">1. Precalienta el Horno</h3>
+                <p className="text-muted-foreground mt-2">Para una base crujiente, precalienta tu horno a 220°C (425°F). Coloca la rejilla en el centro.</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
+                  <Pizza className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mt-4">2. Hornea Directamente</h3>
+                <p className="text-muted-foreground mt-2">Retira todos los envoltorios y coloca la pizza congelada directamente sobre la rejilla del horno. ¡No uses bandeja!</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
+                  <ThumbsUp className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mt-4">3. Disfruta al Momento</h3>
+                <p className="text-muted-foreground mt-2">Hornea de 10 a 15 minutos o hasta que el queso esté dorado y burbujeante. Deja enfriar un minuto y ¡a disfrutar!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contacto" className="py-12 md:py-24">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Contáctanos</h2>
             <div className="grid md:grid-cols-2 gap-12">
@@ -196,7 +236,7 @@ export default function Home() {
                 </ul>
                 <div className="mt-8 rounded-lg overflow-hidden border shadow-lg">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15607.447545920153!2d-77.04351896803213!3d-12.05051613008985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b6a333c3f3%3A0x8a333af24103a80!2sCentro%20C%2C3%ADvico!5e0!3m2!1ses-419!2spe!4v1720216123067!5m2!1ses-419!2spe" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d975.4986162232399!2d-76.94222953335528!3d-11.97982889912752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c4ed41110fef%3A0x1b9a5e8b77b68e0c!2sPizzas%20%26%20Broaster%20Fabichelo!5e0!3m2!1ses-419!2spe!4v1721332021610!5m2!1ses-419!2spe"
                     width="100%" 
                     height="350" 
                     style={{border:0}} 
