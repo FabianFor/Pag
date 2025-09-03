@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Phone, Mail, Facebook, Cake, Pizza } from "lucide-react";
-import SpecialOrderForm from "@/components/special-order-form";
+import { Phone, Mail, Facebook, Pizza, ThumbsUp, CookingPot } from "lucide-react";
 import ContactForm from "@/components/contact-form";
 import { PizzaIcon } from "@/components/pizza-icon";
 
@@ -56,7 +55,8 @@ export default function Home() {
           </a>
           <nav className="ml-auto hidden md:flex gap-6 text-sm font-medium">
             <a href="#pizzas" className="transition-colors hover:text-primary">Nuestras Pizzas</a>
-            <a href="#pedidos" className="transition-colors hover:text-primary">Pedidos Especiales</a>
+            <a href="#quienes-somos" className="transition-colors hover:text-primary">Quiénes Somos</a>
+            <a href="#preparacion" className="transition-colors hover:text-primary">Preparación</a>
             <a href="#contacto" className="transition-colors hover:text-primary">Contacto</a>
           </nav>
         </div>
@@ -104,28 +104,76 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="pedidos" className="bg-card py-12 md:py-24">
+        <section id="quienes-somos" className="bg-card py-12 md:py-24">
           <div className="container px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <span className="text-primary font-semibold">Eventos Especiales</span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">Pedidos para Cumpleaños y Celebraciones</h2>
+                <span className="text-primary font-semibold">Nuestra Historia</span>
+                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">Pasión por la Pizza desde 1998</h2>
                 <p className="text-muted-foreground mb-6">
-                  ¿Planeando un evento? Deja que nos encarguemos de la comida. Ofrecemos pedidos especiales de nuestras pizzas congeladas para que tu celebración sea un éxito. Utiliza nuestro asistente de IA para generar un mensaje de pedido personalizado.
+                  Fabichelo nació de un sueño familiar: llevar el auténtico sabor de la pizza italiana a los hogares de nuestra comunidad. Desde nuestros humildes comienzos en una pequeña cocina, hemos crecido gracias a nuestra dedicación a la calidad, usando solo ingredientes frescos y una receta que ha pasado de generación en generación.
                 </p>
-                <div className="flex items-center gap-4 text-primary">
-                  <Pizza className="h-6 w-6" />
-                  <span>Sabor inolvidable</span>
-                  <Cake className="h-6 w-6" />
-                  <span>Perfecto para fiestas</span>
-                </div>
+                <p className="text-muted-foreground">
+                  Cada pizza que hacemos está llena de amor y tradición. Creemos que la buena comida une a las personas, y nos enorgullece ser parte de tus momentos especiales, desde una cena familiar hasta una celebración con amigos.
+                </p>
               </div>
-              <SpecialOrderForm />
+              <div className="rounded-lg overflow-hidden shadow-xl">
+                <Image 
+                  src="https://picsum.photos/800/600" 
+                  alt="Familia preparando pizza" 
+                  width={800} 
+                  height={600}
+                  className="w-full h-full object-cover"
+                  data-ai-hint="family preparing pizza"
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="contacto" className="py-12 md:py-24">
+        <section id="preparacion" className="py-12 md:py-24">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Consejos para una Pizza Perfecta</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+              <Card>
+                <CardHeader>
+                  <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
+                    <CookingPot className="h-10 w-10 text-primary" />
+                  </div>
+                  <CardTitle className="mt-4">1. Precalienta el Horno</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Para una base crujiente, precalienta tu horno a 220°C (425°F). Coloca la rejilla en el centro.</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
+                    <Pizza className="h-10 w-10 text-primary" />
+                  </div>
+                  <CardTitle className="mt-4">2. Hornea Directamente</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Retira todos los envoltorios y coloca la pizza congelada directamente sobre la rejilla del horno. ¡No uses bandeja!</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
+                    <ThumbsUp className="h-10 w-10 text-primary" />
+                  </div>
+                  <CardTitle className="mt-4">3. Disfruta al Momento</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Hornea de 10 a 15 minutos o hasta que el queso esté dorado y burbujeante. Deja enfriar un minuto y ¡a disfrutar!</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+
+        <section id="contacto" className="bg-card py-12 md:py-24">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Contáctanos</h2>
             <div className="grid md:grid-cols-2 gap-12">
@@ -148,13 +196,13 @@ export default function Home() {
                 </ul>
                 <div className="mt-8 rounded-lg overflow-hidden border shadow-lg">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15607.447545920153!2d-77.04351896803213!3d-12.05051613008985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b6a333c3f3%3A0x8a333af24103a80!2sCentro%20C%C3%ADvico!5e0!3m2!1ses-419!2spe!4v1720216123067!5m2!1ses-419!2spe" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15607.447545920153!2d-77.04351896803213!3d-12.05051613008985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b6a333c3f3%3A0x8a333af24103a80!2sCentro%20C%2C3%ADvico!5e0!3m2!1ses-419!2spe!4v1720216123067!5m2!1ses-419!2spe" 
                     width="100%" 
                     height="350" 
                     style={{border:0}} 
                     allowFullScreen={true}
                     loading="lazy" 
-                    referrerPolicy="no-referrer-when-downgrade">
+                    referrerPolicy="no-referrer-downgrade">
                   </iframe>
                 </div>
               </div>
