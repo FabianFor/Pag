@@ -51,6 +51,7 @@ export default function Home() {
         <div className="container flex h-16 items-center">
           <a href="#" className="flex items-center gap-2 font-bold font-headline text-xl">
             <Image src="/logo.png" alt="Fabichelo Logo" width={48} height={48} className="rounded-full" />
+            <span>Pizzas Congeladas Fabichelo</span>
           </a>
           <nav className="ml-auto hidden md:flex gap-4 text-sm font-medium items-center">
             <a href="#pizzas" className="transition-colors hover:text-primary">Nuestras Pizzas</a>
