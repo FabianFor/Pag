@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Phone, Mail, Facebook, Pizza, ThumbsUp, CookingPot, Cake } from "lucide-react";
+import { Phone, Mail, Facebook, Pizza, ThumbsUp, CookingPot } from "lucide-react";
 import ContactForm from "@/components/contact-form";
-import { PizzaIcon } from "@/components/pizza-icon";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const pizzas = [
@@ -12,42 +11,36 @@ const pizzas = [
     description: "La clásica combinación de queso mozzarella, salsa de tomate y jamón de primera.",
     image: "https://picsum.photos/600/400?random=1",
     aiHint: "american pizza",
-    prices: { personal: "S/ 15.00", familiar: "S/ 30.00" }
   },
   {
     name: "Hawaiana",
     description: "Una mezcla tropical de jamón y piña jugosa sobre una base de queso derretido.",
     image: "https://picsum.photos/600/400?random=2",
     aiHint: "hawaiian pizza",
-    prices: { personal: "S/ 16.00", familiar: "S/ 32.00" }
   },
   {
     name: "Pepperoni",
     description: "Para los amantes del picante, cubierta de pepperoni de alta calidad y mucho queso.",
     image: "https://picsum.photos/600/400?random=3",
     aiHint: "pepperoni pizza",
-    prices: { personal: "S/ 17.00", familiar: "S/ 34.00" }
   },
   {
     name: "Cuatro Quesos",
     description: "Una sinfonía de sabores con queso mozzarella, provolone, parmesano y azul.",
     image: "https://picsum.photos/600/400?random=4",
     aiHint: "cheese pizza",
-    prices: { personal: "S/ 18.00", familiar: "S/ 36.00" }
   },
   {
     name: "Vegetariana",
     description: "Fresca y saludable, con pimientos, cebolla, champiñones, aceitunas y maíz.",
     image: "https://picsum.photos/600/400?random=5",
     aiHint: "vegetarian pizza",
-    prices: { personal: "S/ 16.00", familiar: "S/ 32.00" }
   },
   {
     name: "Carbonara",
     description: "Inspirada en la pasta, con base de nata, bacon, cebolla y un toque de pimienta negra.",
     image: "https://picsum.photos/600/400?random=6",
     aiHint: "carbonara pizza",
-    prices: { personal: "S/ 18.00", familiar: "S/ 36.00" }
   },
 ];
 
@@ -55,10 +48,9 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
+        <div className="container flex h-16 items-center">
           <a href="#" className="flex items-center gap-2 font-bold font-headline text-xl">
-            <PizzaIcon className="h-8 w-8 text-primary" />
-            Fabichelo
+            <Image src="/logo.png" alt="Fabichelo Logo" width={48} height={48} className="rounded-full" />
           </a>
           <nav className="ml-auto hidden md:flex gap-4 text-sm font-medium items-center">
             <a href="#pizzas" className="transition-colors hover:text-primary">Nuestras Pizzas</a>
@@ -72,7 +64,7 @@ export default function Home() {
       </header>
 
       <main className="flex-grow">
-        <section className="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center text-center text-primary-foreground">
+        <section className="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center text-center text-white">
            <Image
             src="https://picsum.photos/1920/1080"
             alt="Pizza deliciosa"
@@ -80,12 +72,12 @@ export default function Home() {
             className="object-cover -z-10"
             data-ai-hint="delicious pizza"
           />
-          <div className="absolute inset-0 bg-black/60 -z-10" />
+          <div className="absolute inset-0 bg-black/70 -z-10" />
           <div className="container px-4 md:px-6">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-4">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-4" style={{textShadow: '2px 2px 8px rgba(0,0,0,0.7)'}}>
               Sabor Artesanal, Listo en Minutos
             </h1>
-            <p className="max-w-[700px] mx-auto text-lg md:text-xl text-primary-foreground/90 mb-8">
+            <p className="max-w-[700px] mx-auto text-lg md:text-xl text-gray-200 mb-8" style={{textShadow: '1px 1px 4px rgba(0,0,0,0.7)'}}>
               Descubre nuestras pizzas congeladas Fabichelo, preparadas con los ingredientes más frescos para que disfrutes en casa.
             </p>
             <Button size="lg" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
@@ -109,16 +101,6 @@ export default function Home() {
                   <CardContent className="p-6 flex flex-col flex-grow">
                     <CardTitle className="text-2xl mb-2">{pizza.name}</CardTitle>
                     <CardDescription className="flex-grow">{pizza.description}</CardDescription>
-                    <div className="mt-4 pt-4 border-t border-border">
-                      <div className="flex justify-between font-semibold">
-                        <span>Personal (18cm):</span>
-                        <span>{pizza.prices.personal}</span>
-                      </div>
-                      <div className="flex justify-between font-semibold mt-1">
-                        <span>Familiar (30cm):</span>
-                        <span>{pizza.prices.familiar}</span>
-                      </div>
-                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -182,7 +164,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
 
         <section id="preparacion" className="bg-card py-12 md:py-24">
           <div className="container px-4 md:px-6">
